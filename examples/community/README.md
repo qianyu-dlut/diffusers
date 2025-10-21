@@ -5550,7 +5550,8 @@ For detailed implementation examples and creative applications, please visit the
 #### Text-to-Image
 **prompt**             |  **image** 
 :-------------------------:|:-------------------------:
-| "A striking photograph of a glass of orange juice on a wooden kitchen table, capturing a playful moment. The orange juice splashes out of the glass and forms the word \"Smile\" in a whimsical, swirling script just above the glass. The background is softly blurred, revealing a cozy, homely kitchen with warm lighting and a sense of comfort." | <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/73575386/500095460-5490df4b-5ed9-4db7-bbca-3768a32ac840.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20251011%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251011T015852Z&X-Amz-Expires=300&X-Amz-Signature=c9dc21e9414ed9069d35c72e21c4226aaea86142ab18dc9571aefb9bbdce9642&X-Amz-SignedHeaders=host">
+| "A striking photograph of a glass of orange juice on a wooden kitchen table, capturing a playful moment. The orange juice splashes out of the glass and forms the word \"Smile\" in a whimsical, swirling script just above the glass. The background is softly blurred, revealing a cozy, homely kitchen with warm lighting and a sense of comfort." | <img width="1536" height="768" alt="20251021-220001" src="https://github.com/user-attachments/assets/028ca447-b837-407b-8f4c-e546a1684cff" />
+
 
 ```python
 import torch
@@ -5566,7 +5567,8 @@ pipe = DiffusionPipeline.from_pretrained(
     vqvae=vqvae,
     tokenizer=tokenizer,
     torch_dtype=torch.bfloat16,
-    custom_pipeline="lumina_dimoo",
+    # use local custom pipeline until it’s merged upstream to diffusers
+    custom_pipeline="path/to/diffusers/examples/community/lumina_dimoo.py",
 )
 pipe.to("cuda")
 
@@ -5591,7 +5593,7 @@ img.save("t2i_test_output.png")
 #### Image-to-Image
 **prompt**             |  **image_before**   |  **image_after**  
 :-------------------------:|:-------------------------:|:-------------------------:
-| "A functional wooden printer stand.Nestled next to a brick wall in a bustling city street, it stands firm as pedestrians hustle by, illuminated by the warm glow of vintage street lamps." | <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/73575386/500095462-7b451c2f-ec15-4cb9-8a6a-4eab9d2f5760.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20251011%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251011T015605Z&X-Amz-Expires=300&X-Amz-Signature=a0e4be32af521b555747b794e660eb0ab116a7ced1cded55448f324fca9fa901&X-Amz-SignedHeaders=host"> | <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/73575386/500095459-1d6631ef-8286-4402-a74b-85fb1ea684c3.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20251011%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251011T015729Z&X-Amz-Expires=300&X-Amz-Signature=4fb8f2e5eb9645b5e8efb1022e01c329f4a54e793a9e3c4e36fdd357e076964a&X-Amz-SignedHeaders=host"> |
+| "A functional wooden printer stand.Nestled next to a brick wall in a bustling city street, it stands firm as pedestrians hustle by, illuminated by the warm glow of vintage street lamps." | ![20251021-215950](https://github.com/user-attachments/assets/cbf5a85d-e7c6-40d7-9557-0d05cc6ec67b) | <img width="512" height="512" alt="20251021-220007" src="https://github.com/user-attachments/assets/61ea3c43-dc98-4c85-b652-3f376ab4131b" /> |
 
 ```python
 import torch
@@ -5608,7 +5610,8 @@ pipe = DiffusionPipeline.from_pretrained(
     vqvae=vqvae,
     tokenizer=tokenizer,
     torch_dtype=torch.bfloat16,
-    custom_pipeline="lumina_dimoo",
+    # use local custom pipeline until it’s merged upstream
+    custom_pipeline="path/to/diffusers/examples/community/lumina_dimoo.py",
 )
 pipe.to("cuda")
 
@@ -5637,7 +5640,7 @@ img.save("i2i_test_output.png")
 #### Multimodal Understanding
 **question**       |   **image**      |   **answer** 
 :-------------------------:|:-------------------------:|:-------------------------:
-| "Please describe the image." | <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/73575386/500095461-9ae63fc0-b992-4652-9af5-b87be647048f.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20251011%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251011T015701Z&X-Amz-Expires=300&X-Amz-Signature=acd3b53d43c81324b2135fde46a0ad25d04dfb71f987456a0b02d1b9af2f2e2e&X-Amz-SignedHeaders=host"> | "The image shows a vibrant orange sports car parked in a showroom. The car has a sleek, aerodynamic design with a prominent front grille and side vents. The body is adorned with black and orange racing stripes, creating a striking contrast against the orange paint. The car is equipped with black alloy wheels and a low-profile body style. The background features a white wall with a large emblem that reads "BREITZEN" and includes a silhouette of a horse and text. The floor is tiled with dark tiles, and the showroom is well-lit, highlighting the car. The overall setting suggests a high-end, possibly luxury, automotive environment."|
+| "Please describe the image." | <img width="1820" height="1024" alt="20251021-220409" src="https://github.com/user-attachments/assets/e133c679-3261-400b-9c61-57f1f6e62ec0" /> | "The image shows a vibrant orange sports car parked in a showroom. The car has a sleek, aerodynamic design with a prominent front grille and side vents. The body is adorned with black and orange racing stripes, creating a striking contrast against the orange paint. The car is equipped with black alloy wheels and a low-profile body style. The background features a white wall with a large emblem that reads "BREITZEN" and includes a silhouette of a horse and text. The floor is tiled with dark tiles, and the showroom is well-lit, highlighting the car. The overall setting suggests a high-end, possibly luxury, automotive environment."|
 
 
 ```python
@@ -5655,7 +5658,8 @@ pipe = DiffusionPipeline.from_pretrained(
     vqvae=vqvae,
     tokenizer=tokenizer,
     torch_dtype=torch.bfloat16,
-    custom_pipeline="lumina_dimoo",
+    # use local custom pipeline until it’s merged upstream
+    custom_pipeline="path/to/diffusers/examples/community/lumina_dimoo.py",
 )
 pipe.to("cuda")
 
